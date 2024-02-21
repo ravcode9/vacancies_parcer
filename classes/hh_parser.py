@@ -15,6 +15,9 @@ class HHParser:
 
 
     def get_employers(self):
+        """
+                Получает список компаний из топ-10 компаний API HeadHunter.
+        """
         data = self.get_request()
         employers = []
         for employer in data:
@@ -23,6 +26,9 @@ class HHParser:
 
 
     def get_vacancies_from_company(self, id):
+        """
+                Получает вакансии отдельной компании по её идентификатору.
+        """
         params = {
             "per_page": 20,
             "employer_id": id
@@ -33,6 +39,9 @@ class HHParser:
 
 
     def get_all_vacancies(self):
+        """
+                Получает все вакансии от топ-10 компаний API HeadHunter.
+        """
         employers = self.get_employers()
         vacancies = []
         for employer in employers:
@@ -41,6 +50,9 @@ class HHParser:
 
 
     def filter_vacancies(self):
+        """
+                Фильтрует вакансии, извлеченные из API HeadHunter, и возвращает отфильтрованные данные.
+        """
         vacancies = self.get_all_vacancies()
         filter_data = []
         for vacancy in vacancies:

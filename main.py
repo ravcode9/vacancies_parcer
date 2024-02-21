@@ -1,9 +1,17 @@
-from utils.utils import (terminate_connections, create_database, create_tables, insert_data_into_tables, show_avg_salary,
-                show_higher_salary_vacancies, show_all_vacancies, show_keyword_vacancies, show_companies_and_vacancies)
+from utils.utils import (
+    terminate_connections, create_database, create_tables, insert_data_into_tables, show_higher_salary_vacancies,
+    show_all_vacancies, show_keyword_vacancies, show_companies_and_vacancies, show_avg_salary
+)
 from classes.db_manager import DBManager
 
 
 def main():
+    """
+        Основная функция программы, предоставляющая интерфейс для работы с базой данных вакансий.
+
+        Пользователь может обновить базу данных, выбрать действия для отображения информации и завершить выполнение.
+
+    """
     print("Хотите ли вы обновить базу данных перед просмотром? (ДА/НЕТ)")
     update_db_choice = input()
 
@@ -43,6 +51,7 @@ def main():
             break
         else:
             print("Некорректный ввод. Пожалуйста, выберите правильный вариант.")
+
 
 if __name__ == "__main__":
     main()

@@ -4,6 +4,9 @@ from classes.hh_parser import HHParser
 
 
 def terminate_connections(db_name):
+    """
+        Завершает все активные соединения с указанной базой данных.
+    """
     conn = psycopg2.connect(dbname="postgres", **config())
     conn.autocommit = True
     cur = conn.cursor()
@@ -19,6 +22,9 @@ def terminate_connections(db_name):
 
 
 def create_database(db_name):
+    """
+        Создает новую базу данных с указанным именем.
+    """
     conn = psycopg2.connect(dbname="postgres", **config())
     conn.autocommit = True
     cur = conn.cursor()
@@ -30,6 +36,9 @@ def create_database(db_name):
     conn.close()
 
 def create_tables(db_name):
+    """
+        Создает таблицы "employers" и "vacancies" в указанной базе данных.
+    """
     conn = psycopg2.connect(dbname=db_name, **config())
     with conn:
         with conn.cursor() as cur:
@@ -51,6 +60,9 @@ def create_tables(db_name):
 
 
 def insert_data_into_tables(db_name):
+    """
+        Заполняет таблицы "employers" и "vacancies" данными из HH API.
+    """
     hh = HHParser()
     employers = hh.get_employers()
     vacancies = hh.filter_vacancies()
@@ -78,28 +90,43 @@ def insert_data_into_tables(db_name):
 
 
 def show_companies_and_vacancies(db):
+    """
+        Выводит информацию о компаниях и количестве их вакансий.
+    """
     companies_and_vacancies_count = db.get_companies_and_vacancies_count()
     print("Компании и количество вакансий:")
     for row in companies_and_vacancies_count:
         print(row)
 
 def show_all_vacancies(db):
+    """
+        Выводит информацию о всех вакансиях.
+    """
     all_vacancies = db.get_all_vacancies_db()
     print("\nВсе вакансии:")
     for row in all_vacancies:
         print(row)
 
 def show_avg_salary(db):
+    """
+        Выводит среднюю зарплату вакансий.
+    """
     avg_salary = db.get_avg_salary()
     print("\nСредняя зарплата вакансий:", avg_salary[0][0])
 
 def show_higher_salary_vacancies(db):
+    """
+        Выводит информацию о вакансиях с зарплатой выше среднего.
+    """
     vacancies_with_higher_salary = db.get_vacancies_with_higher_salary()
     print("\nВакансии с зарплатой выше среднего:")
     for row in vacancies_with_higher_salary:
         print(row)
 
 def show_keyword_vacancies(db, keyword):
+    """
+        Выводит информацию о вакансиях по заданному ключевому слову.
+    """
     keyword = keyword.lower()
     vacancies = db.get_vacancies_with_keyword(keyword)
 

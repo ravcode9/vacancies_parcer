@@ -3,6 +3,9 @@ from configparser import ConfigParser
 import os
 
 def config(filename="database.ini", section="postgresql"):
+    """
+        Функция для чтения параметров конфигурации базы данных из файла.
+    """
     # Получаем абсолютный путь к файлу database.ini
     current_dir = os.path.dirname(__file__)
     full_path = os.path.abspath(os.path.join(current_dir, '..', filename))
